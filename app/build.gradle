@@ -20,6 +20,11 @@ android {
 }
 
 dependencies {
+    final SUPPORT_LIBRARY_VERSION = '27.1.1'
+    final BUTTERKNIFE_VERSION = '8.8.1'
+    final DAGGER2_VERSION = '2.9'
+    final VOLLEY_VERSION = '1.1.0'
+
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.appcompat:appcompat:1.0.2'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
@@ -27,4 +32,19 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+
+    // RecyclerView
+    implementation "com.android.support:recyclerview-v7:$SUPPORT_LIBRARY_VERSION"
+    implementation "com.android.support:cardview-v7:$SUPPORT_LIBRARY_VERSION"
+
+    // Dagger2
+    implementation "com.google.dagger:dagger:$DAGGER2_VERSION"
+    annotationProcessor "com.google.dagger:dagger-compiler:$DAGGER2_VERSION"
+
+    // Butterknife
+    implementation "com.jakewharton:butterknife:$BUTTERKNIFE_VERSION"
+    annotationProcessor "com.jakewharton:butterknife-compiler:$BUTTERKNIFE_VERSION"
+
+    // Volley
+    implementation "com.android.volley:volley:$VOLLEY_VERSION"
 }
