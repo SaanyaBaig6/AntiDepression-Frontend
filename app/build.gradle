@@ -42,8 +42,8 @@ dependencies {
     annotationProcessor "com.google.dagger:dagger-compiler:$DAGGER2_VERSION"
 
     // Butterknife
-    implementation "com.jakewharton:butterknife:$BUTTERKNIFE_VERSION"
-    annotationProcessor "com.jakewharton:butterknife-compiler:$BUTTERKNIFE_VERSION"
+//    implementation "com.jakewharton:butterknife:$BUTTERKNIFE_VERSION"
+//    annotationProcessor "com.jakewharton:butterknife-compiler:$BUTTERKNIFE_VERSION"
 
     // Volley
     implementation "com.android.volley:volley:$VOLLEY_VERSION"

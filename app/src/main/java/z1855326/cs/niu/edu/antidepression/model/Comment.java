@@ -6,9 +6,9 @@ public class Comment {
     private String comment;
 
     public Comment(String id, String timestamp, String comment) {
-        this.id=id;
-        this.timestamp=timestamp;
-        this.comment=comment;
+        this.id = id;
+        this.timestamp = timestamp;
+        this.comment = comment;
     }
 
     public String getId() {

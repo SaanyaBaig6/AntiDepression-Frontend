@@ -1,6 +1,7 @@
 package z1855326.cs.niu.edu.antidepression.controller;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.Toast;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -17,11 +18,19 @@ import z1855326.cs.niu.edu.antidepression.service.Callback;
 import z1855326.cs.niu.edu.antidepression.service.HTTPService;
 import z1855326.cs.niu.edu.antidepression.utils.DateHelper;
 
+import static android.content.ContentValues.TAG;
+
 public class PostService {
     private ArrayList<Post> posts = new ArrayList<>();
     private ArrayList<Comment> comments = new ArrayList<>();
     public String subject;
     public String desc;
+
+    private static PostService ourInstance = new PostService();
+    public static PostService getInstance() {
+        return ourInstance;
+    }
+    private PostService() {}
 
     public void fetchFeed(final Context context, final Callback callback) {
         String method = "GET";
@@ -31,45 +40,45 @@ public class PostService {
         HTTPService.getInstance().httpRequest(context, method, url, jsonRequest, new Callback(){
             @Override
             public void onComplete(boolean result, JSONObject response) {
-                if(result) {
-                    try {
-                        posts.clear();
-                        JSONArray jsonArray = response.getJSONArray("post");
-                        for (int i=0; i<jsonArray.length(); i++) {
-                            JSONObject obj = jsonArray.getJSONObject(i);
-                            String postId = obj.getString("id");
-                            String timestamp = DateHelper.getInstance().convertDate(obj.getString("timestamp"));
-                            String subject = obj.getString("subject");
-                            String desc = obj.getString("description");
-                            JSONArray commentsArray = obj.getJSONArray("comments");
-                            comments.clear();
-                            for (int j=0; j<commentsArray.length(); j++) {
-                                String commentid = obj.getString("id");
-                                String commenttimestamp = obj.getString("timestamp");
-                                String comment = obj.getString("comment");
-                                comments.add(new Comment(commentid,commenttimestamp,comment));
-                            }
-
-                            posts.add(new Post(postId,timestamp,subject,desc,comments));
+            if(result) {
+                try {
+                    posts.clear();
+                    JSONArray jsonArray = response.getJSONArray("post");
+                    for (int i=0; i<jsonArray.length(); i++) {
+                        JSONObject obj = jsonArray.getJSONObject(i);
+                        String postId = obj.getString("_id");
+                        String timestamp = DateHelper.getInstance().convertDate(obj.getString("timestamp"));
+                        String subject = obj.getString("subject");
+                        String desc = obj.getString("description");
+                        JSONArray commentsArray = obj.getJSONArray("comment");
+                        comments.clear();
+                        for (int j=0; j<commentsArray.length(); j++) {
+                            String commentid = obj.getString("_id");
+                            String commenttimestamp = obj.getString("timestamp");
+                            String comment = obj.getString("comment");
+                            comments.add(new Comment(commentid,commenttimestamp,comment));
                         }
-                        callback.onComplete(true, null);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                        Toast toast = Toast.makeText(context,
-                                (CharSequence) e,
-                                Toast.LENGTH_SHORT);
-                        toast.show();
-                        callback.onComplete(false, null);
+                        Log.d(TAG, "position "+ postId + " Comments "+ comments);
+                        posts.add(new Post(postId,timestamp,subject,desc,comments));
                     }
-                }
-                else {
-                    String message = "Fetch Feed API failed, Please Try Again Later.";
+                    callback.onComplete(true, null);
+                } catch (JSONException e) {
+                    e.printStackTrace();
                     Toast toast = Toast.makeText(context,
-                            message,
+                            (CharSequence) e,
                             Toast.LENGTH_SHORT);
                     toast.show();
                     callback.onComplete(false, null);
                 }
+            }
+            else {
+                String message = "Fetch Feed API failed, Please Try Again Later.";
+                Toast toast = Toast.makeText(context,
+                        message,
+                        Toast.LENGTH_SHORT);
+                toast.show();
+                callback.onComplete(false, null);
+            }
             }
         } );
     }
@@ -106,5 +115,9 @@ public class PostService {
 
     public ArrayList<Post> getPosts() {
         return posts;
+    }
+
+    public ArrayList<Comment> getComments(int position) {
+        return posts.get(position).getComments();
     }
 }

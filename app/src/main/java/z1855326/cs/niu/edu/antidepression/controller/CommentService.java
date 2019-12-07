@@ -17,6 +17,12 @@ public class CommentService {
     public String postId;
     public String comment;
 
+    private static CommentService ourInstance = new CommentService();
+    public static CommentService getInstance() {
+        return ourInstance;
+    }
+    private CommentService() {}
+
     public void AddComment(final Context context, final Callback callback) {
         String url = Constants.BASE_URL + "/post";
         Map<String, String> params = new HashMap<String, String>();
@@ -24,7 +30,7 @@ public class CommentService {
         params.put("id", postId);
         params.put("comment", comment);
 
-        String method = "POST";
+        String method = "PUT";
         JSONObject jsonRequest = new JSONObject(params);
 
         HTTPService.getInstance().httpRequest(context, method, url, jsonRequest, new Callback(){
