@@ -22,6 +22,6 @@ public class CommentsViewHolder extends RecyclerView.ViewHolder {
 
     public void updateUI(Comment comment) {
         this.timestamp.setText(comment.getTimestamp());
-        this.comment.setText(comment.getComment().);
+        this.comment.setText(comment.getComment());
     }
 }

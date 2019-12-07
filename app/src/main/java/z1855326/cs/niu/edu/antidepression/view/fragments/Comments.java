@@ -21,6 +21,7 @@ import org.json.JSONObject;
 import z1855326.cs.niu.edu.antidepression.R;
 import z1855326.cs.niu.edu.antidepression.adapters.CommentAdapter;
 import z1855326.cs.niu.edu.antidepression.adapters.FeedAdapter;
+import z1855326.cs.niu.edu.antidepression.controller.CommentService;
 import z1855326.cs.niu.edu.antidepression.controller.PostService;
 import z1855326.cs.niu.edu.antidepression.service.Callback;
 import z1855326.cs.niu.edu.antidepression.view.activities.AntiDepression;
@@ -46,10 +47,19 @@ public class Comments extends Fragment {
         final int position = Integer.valueOf(value);
         ((AntiDepression) getActivity()).button.setText(buttonText);
         ((AntiDepression) getActivity()).title.setText(titleText);
-        progressBar.setVisibility(View.GONE);
-        CommentAdapter adapter;
-        adapter = new CommentAdapter(PostService.getInstance().getPosts(), position, getActivity());
-        recyclerView.setAdapter(adapter);
+        CommentService.getInstance().postId = PostService.getInstance().getPosts().get(position).getId();
+        CommentService.getInstance().fetchComments(getContext(), new Callback(){
+            @Override
+            public void onComplete(boolean result, JSONObject jsonObject) {
+                if(result) {
+                    progressBar.setVisibility(View.GONE);
+                    CommentAdapter adapter;
+                    adapter = new CommentAdapter(CommentService.getInstance().getComments(), getActivity());
+                    recyclerView.setAdapter(adapter);
+                }
+            }
+        });
+
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);

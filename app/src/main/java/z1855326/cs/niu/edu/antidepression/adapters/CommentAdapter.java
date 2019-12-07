@@ -20,19 +20,18 @@ import z1855326.cs.niu.edu.antidepression.view.activities.AntiDepression;
 
 public class CommentAdapter extends RecyclerView.Adapter<CommentsViewHolder> {
 
-    private ArrayList<Post> posts;
+    private ArrayList<Comment> comments;
     private Activity activity;
     private int position;
 
-    public CommentAdapter(ArrayList<Post> posts, int position, Activity activity) {
-        this.posts = posts;
+    public CommentAdapter(ArrayList<Comment> comments, Activity activity) {
+        this.comments = comments;
         this.activity = activity;
-        this.position = position;
     }
 
     @Override
     public void onBindViewHolder(CommentsViewHolder holder, final int position) {
-        final Comment comment = posts.get(this.position).getComments().get(position);
+        final Comment comment = comments.get(position);
         holder.updateUI(comment);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -45,7 +44,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentsViewHolder> {
 
     @Override
     public int getItemCount() {
-        return posts.get(position).getComments().size();
+        return comments.size();
     }
 
     @Override
