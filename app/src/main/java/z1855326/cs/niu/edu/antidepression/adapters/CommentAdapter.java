@@ -29,6 +29,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentsViewHolder> {
         this.activity = activity;
     }
 
+    //to bind data with the ui
     @Override
     public void onBindViewHolder(CommentsViewHolder holder, final int position) {
         final Comment comment = comments.get(position);
@@ -42,11 +43,13 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentsViewHolder> {
 
     }
 
+    // get size of ui list
     @Override
     public int getItemCount() {
         return comments.size();
     }
 
+    //mapping card with the recycler view
     @Override
     public CommentsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View card = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_layout_comments, parent, false);

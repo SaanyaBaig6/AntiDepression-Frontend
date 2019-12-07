@@ -25,6 +25,7 @@ public class Splash extends AppCompatActivity {
 
     }
 
+    // after 3 second, the main activity will be rendered
     private void navigateToHome() {
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {

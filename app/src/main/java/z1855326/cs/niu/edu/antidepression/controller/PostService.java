@@ -26,12 +26,14 @@ public class PostService {
     public String subject;
     public String desc;
 
+    //code to create singleton class which is a design pattern to avoid redundant memory storage
     private static PostService ourInstance = new PostService();
     public static PostService getInstance() {
         return ourInstance;
     }
     private PostService() {}
 
+    //service to hit backend api to get feed of a posts
     public void fetchFeed(final Context context, final Callback callback) {
         String method = "GET";
         String url = Constants.BASE_URL + "/post";
@@ -83,6 +85,7 @@ public class PostService {
         } );
     }
 
+    //service to hit backend api toadd a post
     public void AddPost(final Context context, final Callback callback) {
         String url = Constants.BASE_URL + "/post";
         Map<String, String> params = new HashMap<String, String>();
@@ -112,11 +115,12 @@ public class PostService {
         } );
     }
 
-
+    //getter for posts
     public ArrayList<Post> getPosts() {
         return posts;
     }
 
+    //getter for comments
     public ArrayList<Comment> getComments(int position) {
         return posts.get(position).getComments();
     }

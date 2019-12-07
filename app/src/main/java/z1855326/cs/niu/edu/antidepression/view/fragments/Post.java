@@ -33,6 +33,7 @@ public class Post extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+        //mapping view to xml layout
         final View view = inflater.inflate(R.layout.fragment_post, container, false);
         this.timestamp = (TextView)view.findViewById(R.id.post_timestamp);
         this.subject = (TextView)view.findViewById(R.id.post_subject);
@@ -46,6 +47,7 @@ public class Post extends Fragment {
         this.timestamp.setText(timestamp);
         this.subject.setText(subject);
         this.description.setText(description);
+        // setting header values
         ((AntiDepression) getActivity()).button.setText(buttonText);
         ((AntiDepression) getActivity()).title.setText(titleText);
 

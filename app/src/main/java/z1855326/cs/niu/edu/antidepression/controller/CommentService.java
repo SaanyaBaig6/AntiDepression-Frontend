@@ -24,14 +24,16 @@ import static android.content.ContentValues.TAG;
 public class CommentService {
     public String postId;
     public String comment;
-    private ArrayList<Comment> comments = new ArrayList<>();
+    private ArrayList<Comment> comments = new ArrayList<>(); // to store all comments of a post
 
+    //code to create singleton class which is a design pattern to avoid redundant memory storage
     private static CommentService ourInstance = new CommentService();
     public static CommentService getInstance() {
         return ourInstance;
     }
     private CommentService() {}
 
+    //service to hit backend api to add a comment
     public void AddComment(final Context context, final Callback callback) {
         String url = Constants.BASE_URL + "/post";
         Map<String, String> params = new HashMap<String, String>();
@@ -61,6 +63,7 @@ public class CommentService {
         } );
     }
 
+    //service to hit backend api to get comments of a post
     public void fetchComments(final Context context, final Callback callback) {
         String method = "GET";
         String url = Constants.BASE_URL + "/post/comment?id=" + postId;
@@ -101,6 +104,8 @@ public class CommentService {
             }
         } );
     }
+
+    //getter for comments
     public ArrayList<Comment> getComments() {
         return comments;
     }

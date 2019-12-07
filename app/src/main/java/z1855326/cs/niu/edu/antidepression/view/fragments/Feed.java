@@ -39,10 +39,12 @@ public class Feed extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+        //mapping view to xml layout
         View view = inflater.inflate(R.layout.fragment_feed, container, false);
         progressBar = view.findViewById(R.id.progressBar_feed);
         final RecyclerView recyclerView = view.findViewById(R.id.recyclerView_feed);
         recyclerView.setHasFixedSize(true);
+        // setting header values
         ((AntiDepression) getActivity()).button.setText(buttonText);
         ((AntiDepression) getActivity()).title.setText(titleText);
         PostService.getInstance().fetchFeed(getContext(), new Callback(){

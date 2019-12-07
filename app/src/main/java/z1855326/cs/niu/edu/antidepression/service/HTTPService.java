@@ -32,6 +32,7 @@ public class HTTPService {
     private HTTPService() {
     }
 
+    // Rest client function to call backend apis
     public void httpRequest(Context context, String method, String url, JSONObject jsonRequest, final Callback callback) {
 
         int requestMethod = 0;
@@ -80,7 +81,7 @@ public class HTTPService {
                 return headers;
             }
         };
-        Volley.newRequestQueue(context).add(jsonObjectRequest);
+        Volley.newRequestQueue(context).add(jsonObjectRequest); //volley is the rest client function
     }
 
 

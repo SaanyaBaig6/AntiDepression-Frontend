@@ -34,7 +34,9 @@ public class AddPost extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+        //mapping view to xml layout
         View view = inflater.inflate(R.layout.fragment_add_post, container, false);
+        // setting header values
         ((AntiDepression) getActivity()).button.setText(buttonText);
         ((AntiDepression) getActivity()).title.setText(titleText);
         subject = view.findViewById(R.id.addPost_subject);
@@ -44,9 +46,11 @@ public class AddPost extends Fragment {
         subject.setText("");
         desc.setText("");
 
+        //submit function to add a comment
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // checking if the editText values are empty
                 if(subject.getText().toString().equalsIgnoreCase("") || desc.getText().toString().equalsIgnoreCase("")) {
                     String messag = "";
                     if(subject.getText().toString().equalsIgnoreCase("")) {

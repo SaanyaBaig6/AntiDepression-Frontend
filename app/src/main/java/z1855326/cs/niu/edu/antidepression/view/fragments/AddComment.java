@@ -37,19 +37,25 @@ public class AddComment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+        //mapping view to xml layout
         View view = inflater.inflate(R.layout.fragment_add_comment, container, false);
+        // setting header values
         ((AntiDepression) getActivity()).button.setText(buttonText);
         ((AntiDepression) getActivity()).title.setText(titleText);
+        //getting data from fragments
         final String value = getArguments().getString("Position");
         final int position = Integer.valueOf(value);
+
         comment = view.findViewById(R.id.addComment_comment);
         submit = view.findViewById(R.id.addComment_submit);
 
         comment.setText("");
 
+        //submit function to add a post
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // checking if the editText values are empty
                 if(comment.getText().toString().equalsIgnoreCase("")) {
                     String messag = "";
                     if(comment.getText().toString().equalsIgnoreCase("")) {
@@ -67,14 +73,14 @@ public class AddComment extends Fragment {
                         @Override
                         public void onComplete(boolean result, JSONObject jsonObject) {
                             String message = null;
-                            if(result) {
+                            if(result) { // success scenario
                                 message = "Success";
                                 Fragment fragment = Feed.newInstance();
                                 getFragmentManager().beginTransaction().replace(R.id.main_frame_layout, fragment)
                                         .addToBackStack(null)
                                         .commit();
                             }
-                            else {
+                            else { //fail scenario
                                 message = "Failed";
                             }
                             Toast toast = Toast.makeText(getContext(),

@@ -11,6 +11,7 @@ public class Post {
     private String desc;
     private ArrayList<Comment> comments;
 
+    //constructor to modal
     public Post(String id, String timestamp, String subject, String desc, ArrayList<Comment> comments) {
         this.id = id;
         this.timestamp = timestamp;
@@ -19,6 +20,7 @@ public class Post {
         this.comments = comments;
     }
 
+    //getter and setters
     public String getId() {
         return id;
     }

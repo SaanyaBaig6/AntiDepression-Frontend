@@ -39,12 +39,14 @@ public class Comments extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+        //mapping view to xml layout
         View view = inflater.inflate(R.layout.fragment_comments, container, false);
         progressBar = view.findViewById(R.id.progressBar_comments);
         final RecyclerView recyclerView = view.findViewById(R.id.recyclerView_comments);
         recyclerView.setHasFixedSize(true);
         final String value = getArguments().getString("Position");
         final int position = Integer.valueOf(value);
+        // setting header values
         ((AntiDepression) getActivity()).button.setText(buttonText);
         ((AntiDepression) getActivity()).title.setText(titleText);
         CommentService.getInstance().postId = PostService.getInstance().getPosts().get(position).getId();

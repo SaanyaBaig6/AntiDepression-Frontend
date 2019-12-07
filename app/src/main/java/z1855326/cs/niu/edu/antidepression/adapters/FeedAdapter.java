@@ -26,6 +26,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedViewHolder> {
         this.activity = activity;
     }
 
+    //to bind data with the ui
     @Override
     public void onBindViewHolder(FeedViewHolder holder, final int position) {
         final Post post = posts.get(position);
@@ -40,11 +41,13 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedViewHolder> {
 
     }
 
+    // get size of ui list
     @Override
     public int getItemCount() {
         return posts.size();
     }
 
+    //mapping card with the recycler view
     @Override
     public FeedViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View card = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_layout_feed, parent, false);

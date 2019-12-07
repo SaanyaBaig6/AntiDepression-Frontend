@@ -5,12 +5,14 @@ public class Comment {
     private String timestamp;
     private String comment;
 
+    //constructor to modal
     public Comment(String id, String timestamp, String comment) {
         this.id = id;
         this.timestamp = timestamp;
         this.comment = comment;
     }
 
+    //getter and setters
     public String getId() {
         return id;
     }

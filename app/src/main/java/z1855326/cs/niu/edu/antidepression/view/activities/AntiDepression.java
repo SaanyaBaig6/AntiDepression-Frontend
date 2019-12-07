@@ -33,6 +33,7 @@ public class AntiDepression extends AppCompatActivity {
         this.title = findViewById(R.id.title);
         this.title.setText(titleText);
 
+        // mapping one framelayout for all the fragments
         fragment = getSupportFragmentManager().findFragmentByTag(MAIN_FRAGMENT);
         Feed feedFragment = Feed.newInstance();
         getSupportFragmentManager().beginTransaction().add(R.id.main_frame_layout, feedFragment,
@@ -40,6 +41,7 @@ public class AntiDepression extends AppCompatActivity {
 
     }
 
+    // fragment functions to be stacked on the activity
     public void gotoPostFragement(int position, z1855326.cs.niu.edu.antidepression.model.Post post) {
         Fragment fragment = Post.newInstance();
         Bundle args = new Bundle();
